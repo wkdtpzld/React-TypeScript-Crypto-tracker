@@ -67,6 +67,16 @@ interface IPriceData {
     };
 }
 
+interface IHistorical {
+    close: string
+    high: string
+    low: string
+    market_cap: number
+    open: string
+    time_close: number
+    time_open: number
+    volume: string
+}
 
 export async function fetchCoins() {
     const response = await axios.get<CoinInterface[]>(`${BASE_URL}/coins`)
@@ -94,6 +104,14 @@ export async function fetchCoinTickers(coinId:string) {
             .catch((error) => {
                 console.log(error.message);
             });
+    
+    return response;
+};
+
+export async function fetchCoinChart(coinId: string) {
+    const response = await axios.get<IHistorical[]>(`https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`)
+        .then(res => res.data)
+        .catch(error => console.log(error?.message));
     
     return response;
 };
