@@ -1,57 +1,22 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useState, useEffect } from 'react';
-import axios, { AxiosRequestConfig } from "axios";
-
-interface CoinInterface {
-    id: string,
-    name: string,
-    symbol: string,
-    rank: number,
-    is_new: boolean,
-    is_active: boolean,
-    type: string,
-}
-
-interface AxiosResponse<T = any>  {
-    data: T;
-    status: number;
-    statusText: string;
-    headers: any;
-    config: AxiosRequestConfig;
-    request?: any;
-    slice?: any;
-}
-
+import { fetchCoins } from "../api";
+import { useQuery } from "react-query"
 
 const Coins = () => {
 
-    const [coins, setCoins] = useState<CoinInterface[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        (async () => {
-            await axios.get<AxiosResponse>("https://api.coinpaprika.com/v1/coins")
-                .then((response) => {
-                    setCoins(response.data.slice(0, 100));
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.log(error.message);
-                });
-        })();
-    }, []);
-
+    const { isLoading, data } = useQuery(["allCoins"], fetchCoins);
+    
     return (
         <Container>
             <Header>
                 <Title>Coins</Title>
             </Header>
-            {loading ? (
+            {isLoading ? (
             <Loader>"Loading..."</Loader>
             ) : (
                 <CoinList>
-                    {coins.map((coin) => (
+                    {data?.slice(0,100).map((coin) => (
                     <Coin key={coin.id}>
                         <Link to={`/${coin.id}`} state={coin.name}>
                             <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt={coin.id} />
