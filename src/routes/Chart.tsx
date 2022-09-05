@@ -15,56 +15,104 @@ const Chart = ({coinId}:IChartProps) => {
             {isLoading ? (
                 "Loading Chart..."
             ) : (
-            <ApexChart
-                type="line"
-                series={[
-                    {
-                        name: "Price",
-                        data: data?.map((price) => parseFloat(price.close)) ?? []
-                    }
-                ]}
-                options={{
-                    chart: {
-                        height: 300,
-                        width: 500,
-                        toolbar: {
+                <ApexChart
+                    type='candlestick'
+                    series={[
+                        {
+                            data: data?.map((price) => {
+                                return {
+                                    x: new Date(price.time_open).toLocaleString(),
+                                    y: [parseFloat(price.open), parseFloat(price.high), parseFloat(price.low), parseFloat(price.close)]
+                                }
+                            }) ?? []
+                        }
+                    ]}
+                    options={{
+                        chart: {
+                            height: 300,
+                            width: 300,
+                            toolbar: {
+                                show: false
+                            },
+                            background: "transparent"
+                        },
+                        title: {
+                            text: `${coinId}`,
+                            align: 'left'
+                        },
+                        theme: {
+                            mode: "dark"
+                        },
+                        xaxis: {
+                            labels: {
+                                show: false
+                            },
+                            axisTicks: {
+                                show: false
+                            },
+                        },
+                        yaxis: {
                             show: false
                         },
-                        background: "transparent"
-                    },
-                    grid: {show: false},
-                    theme: {
-                        mode: "dark"
-                    },
-                    stroke: {
-                        curve: 'smooth',
-                        width: 3,
-                    },
-                    yaxis: {show: false},
-                    xaxis: {
-                        labels: {
-                            show: false
-                        },
-                        axisTicks: {
-                            show: false
-                        },
-                        axisBorder: {
-                            show: false
-                        },
-                        categories: data?.map((time) => time.time_close),
-                        type: "datetime"
-                    },
-                    fill: {
-                        type: "gradient", gradient: {gradientToColors: ["#4cd137"], stops: [0, 100]}
-                    },
-                    colors: ["#00a8ff"],
-                    tooltip: {
-                        y: {
-                            formatter: (value) => `${value.toFixed(2)}`
-                        },
-                    }
-                }}
-            />
+                        plotOptions: {
+                            candlestick: {
+                                colors: {
+                                    upward: '#0097e6'
+                                }
+                            }
+                        }
+                    }}
+                />
+            // <ApexChart
+            //     type="line"
+            //     series={[
+            //         {
+            //             name: "Price",
+            //             data: data?.map((price) => parseFloat(price.close)) ?? []
+            //         }
+            //     ]}
+            //     options={{
+            //         chart: {
+            //             height: 300,
+            //             width: 500,
+            //             toolbar: {
+            //                 show: false
+            //             },
+            //             background: "transparent"
+            //         },
+            //         grid: {show: false},
+            //         theme: {
+            //             mode: "dark"
+            //         },
+            //         stroke: {
+            //             curve: 'smooth',
+            //             width: 3,
+            //         },
+            //         yaxis: {show: false},
+            //         xaxis: {
+            //             labels: {
+            //                 show: false
+            //             },
+            //             axisTicks: {
+            //                 show: false
+            //             },
+            //             axisBorder: {
+            //                 show: false
+            //             },
+            //             categories: data?.map((time) => time.time_close),
+            //             type: "datetime"
+            //         },
+            //         fill: {
+            //             type: "gradient", gradient: {gradientToColors: ["#4cd137"], stops: [0, 100]}
+            //         },
+            //         colors: ["#00a8ff"],
+            //         tooltip: {
+            //             y: {
+            //                 formatter: (value) => `${value.toFixed(2)}`
+            //             },
+            //         }
+            //     }}
+            // />
             )}
         </div>
     );

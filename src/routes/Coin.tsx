@@ -8,6 +8,8 @@ import { useMatch } from "react-router-dom";
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface RouterState {
     state: string;
@@ -28,14 +30,20 @@ const Coin = () => {
     );
 
     const loading = infoLoading || tickersLoading
+    
 
     return (
         <Container>
+            <BackBtn>
+                <Link to="/">
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </Link>
+            </BackBtn>
             <Helmet>
-                <title>{ state ? infoData?.id : loading ? "Loading..." : infoData?.name }</title>
+                <title>{ state ? infoData?.symbol : loading ? "Loading..." : infoData?.symbol }</title>
             </Helmet>
             <Header>
-                <Title>{ state ? infoData?.id : loading ? "Loading..." : infoData?.name }</Title>
+                <Title>{ state ? infoData?.symbol : loading ? "Loading..." : infoData?.symbol }</Title>
             </Header>
             {loading ? (
                 <Loader>Loading...</Loader>
@@ -82,7 +90,7 @@ const Coin = () => {
 
                 <Routes>
                     <Route path="chart" element={<Chart coinId={coinId!}/>} />
-                    <Route path="price" element={<Price />} />
+                    <Route path="price" element={<Price tickersData={tickersData!}/>} />
                 </Routes>
                 </>
                 
@@ -98,6 +106,13 @@ export default Coin;
 const Title = styled.h1`
     color: ${props => props.theme.accentColor};
     font-size: 48px;
+`;
+
+const BackBtn = styled.div`
+    position: absolute;
+    font-size: 48px;
+    padding: 20px 0px;
+    cursor: pointer;
 `;
 
 const Container = styled.div`
