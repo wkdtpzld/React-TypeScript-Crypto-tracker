@@ -18,7 +18,7 @@ interface RouterState {
 const Coin = () => {
     
     const { coinId } = useParams();
-    const { state } = useLocation() as RouterState;
+    const { state } = useLocation() as RouterState; 
     const priceMatch = useMatch("/:coinId/price");
     const chartMatch = useMatch("/:coinId/chart");
 
@@ -60,7 +60,7 @@ const Coin = () => {
                     </OverviewItem>
                     <OverviewItem>
                         <span>Price:</span>
-                        <span>{tickersData?.quotes.USD.price.toFixed(2)}</span>
+                        <span>{tickersData?.quotes?.USD?.price.toFixed(2)}</span>
                     </OverviewItem>
                 </Overview>
                 <Description>{infoData?.description}</Description>
@@ -89,7 +89,7 @@ const Coin = () => {
                 
 
                 <Routes>
-                    <Route path="chart" element={<Chart coinId={coinId!}/>} />
+                    <Route path="chart" element={<Chart coinId={coinId!} />} />
                     <Route path="price" element={<Price tickersData={tickersData!}/>} />
                 </Routes>
                 </>
