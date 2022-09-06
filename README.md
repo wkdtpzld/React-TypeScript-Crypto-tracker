@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Coin-tracker 
+----
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+코인 트래커 API를 사용한 실시간 COIN 가격을 불러오는 웹 서비스입니다.
+https://wkdtpzld.github.io/React-TypeScript-Crypto-tracker/
 
-## Available Scripts
+----
 
-In the project directory, you can run:
+## 사용기술
 
-### `npm start`
+<img src="https://img.shields.io/badge/Typescript-192a56?style=flat-square&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/React-487eb0?style=flat-square&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/styledComponents-DB7093?style=flat-square"> <img src="https://img.shields.io/badge/reactQuery-FF4154?style=flat-square&logo=reactquery&logoColor=white"> 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+----
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 계기
 
-### `npm test`
+TypeScript에 대한 이해도, ReactQuery에 대한 이해도를 습득하기 위함.
+또한 실시간 api를 반복해서 가져오는 작업이 필요했음.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-----
 
-### `npm run build`
+## 중점으로 구현한 부분
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### styled-components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+지금까지는 scss, css를 이용한 스타일링을 하였습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+하지만 html div태그로 도배되는 코드로 해당 코드의 역할에 대한 이해도가 떨어졌기 떄문에
 
-### `npm run eject`
+styled-component를 이용하여 클린코드를 구현하기 위해 노력하였습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://user-images.githubusercontent.com/87063105/188733446-be071784-970e-4e79-a743-9baaedf62e53.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+각 태그에 대한 역할의 의미를 잘 담아 작성하였고
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+알아보기 쉽고 해당 역할에 대한 이해도가 상승하였습니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### React-query
 
-## Learn More
+지금까지의 프로젝트를 보면 axios를 통하여 API를 호출하였지만
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+다른 라우터를 호출하고 되돌아갔을때 똑같은 API를 호출하며 로딩을 다시하게 됩니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+하지만 react-query를 사용하여 캐시에 저장을 시켰고 재로딩의 필요없이 관리가 가능해졌습니다.
 
-### Code Splitting
+또한 refetch를 사용하여 반복적인 API호출이 가능했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![image](https://user-images.githubusercontent.com/87063105/188734956-0be6e19a-bed7-4cfb-aeb9-14b75c0fe514.png)
 
-### Analyzing the Bundle Size
+![image](https://user-images.githubusercontent.com/87063105/188735139-3cd63e29-87ac-41ab-bdf9-ca7aaeb65df9.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
